@@ -1,0 +1,96 @@
+{% include "vueEnteteGestionnaire.html" %}
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">N°Carte</th>
+                    <th scope="col">Solde</th>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Service</th>
+                </tr>
+            </thead>
+
+             {% for i in range (nbPersonnels)%}
+            <tbody>
+
+                 <tr>
+                    <td scope="col"> {{ personnels[i]['matricule'] }} </td>
+                    <td scope="col">{{ personnels[i]['solde'] }}</td>
+                    <td scope="col">{{ personnels[i]['matricule'] }}</td>
+                    <td scope="col">{{ personnels[i]['nom'] }}</td>
+                     <td scope="col">{{ personnels[i]['prenom'] }}</td>
+                     <td scope="col">{{ personnels[i]['nomService'] }}</td>
+                     {% if personnels[i]['activee'] == true %}
+                     <td> <a href="/gestionnaire/personnel/carte/bloquer/{{ personnels[i]['matricule'] }}" class="btn btn-danger"> Bloquer </a>  </td>
+
+                     <td>  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter{{ personnels[i]['matricule'] }}"> Init.MDP </button>
+                        <div class="modal fade" id="exampleModalCenter{{ personnels[i]['matricule'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLongTitle{{ personnels[i]['matricule'] }}">Voulez-vous réinitiliser le mot de passe de {{ personnels[i]['prenom'] }} {{ personnels[i]['nom'] }} </h4>
+
+                              </div>
+
+                              <div class="modal-footer">
+                               <center>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+                               <a href="/gestionnaire/personnel/carte/initMDP/{{ personnels[i]['matricule'] }}" <button type="button" class="btn btn-success ">Oui</button> </a>
+                               </center>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                     </td>
+                     <td>
+
+                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCente{{ personnels[i]['matricule'] }}"> Créditer </button>
+                        <div class="modal fade" id="exampleModalCente{{ personnels[i]['matricule'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLongTitl{{ personnels[i]['matricule'] }}">Créditer </h4>
+
+                              </div>
+                                <center>
+                                    <form action="/gestionnaire/personnel/carte/crediter/{{ personnels[i]['matricule'] }}" method="POST">
+                                <input type="text" name="crediter"/>
+                               <button type="submit" class="btn btn-success ">Créditer</button>
+                                 </form>
+                               </center>
+
+                              </div>
+
+                            </div>
+                          </div>
+
+
+
+                     </td>
+                     {% else %}
+                     <td> <a href="/gestionnaire/personnel/carte/activer/{{ personnels[i]['matricule'] }} " class="btn btn-success"> Activer </a>  </td>
+                     {% endif %}
+
+                 </tr>
+            </tbody>
+
+              {%endfor%}
+
+        </table>
+    </div>
+</div>
+
+
+
+{% include "vuePied.html" %}
+
+
+
+
+
+

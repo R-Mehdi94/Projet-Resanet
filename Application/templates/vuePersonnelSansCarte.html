@@ -1,0 +1,66 @@
+{% include "vueEnteteGestionnaire.html" %}
+
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Matricule</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Service</th>
+                </tr>
+            </thead>
+
+             {% for i in range (nbPersonnels)%}
+            <tbody>
+
+
+                 <tr>
+                    <td scope="col"> {{ personnels[i]['matricule'] }} </td>
+                    <td scope="col">{{ personnels[i]['nom'] }}</td>
+                     <td scope="col">{{ personnels[i]['prenom'] }}</td>
+                     <td scope="col">{{ personnels[i]['nomService'] }}</td>
+                     <td>  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter{{ personnels[i]['matricule'] }}"> Créer compte </button>
+                        <div class="modal fade" id="exampleModalCenter{{ personnels[i]['matricule'] }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle{{ personnels[i]['matricule'] }}">Nom : {{ personnels[i]['nom'] }} </h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle{{ personnels[i]['matricule'] }}">Prénom : {{ personnels[i]['prenom'] }} </h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle{{ personnels[i]['matricule'] }}">Matricule : {{ personnels[i]['matricule'] }} </h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle{{ personnels[i]['matricule'] }}">Service : {{ personnels[i]['nomService'] }} </h5>
+
+                              </div>
+                                <center>
+                                    <form action="/gestionnaire/personnel/sansCarte/creerCarte/{{ personnels[i]['matricule'] }}" method="POST">
+
+
+                                      <input type="radio" name="etat"
+                                             value="0" checked /> Bloquer
+                                      <input type="radio" name="etat"
+                                             value="1" /> Activer
+                                      <div class="modal-footer">
+                                       <center>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                       <button type="submit" class="btn btn-success ">Créer</button>
+                                       </center>
+                                      </div>
+                                </center>
+
+
+                                 </form>
+                            </div>
+                          </div>
+                        </div>
+                     </td>
+                </tr>
+            </tbody>
+              {%endfor%}
+        </table>
+    </div>
+</div>
+
+{% include "vuePied.html" %}

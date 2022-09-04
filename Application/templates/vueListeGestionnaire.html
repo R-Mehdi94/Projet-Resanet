@@ -1,0 +1,56 @@
+{% include "vueEntete.html" %}
+{% include "vueEnteteUsager.html" %}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-3">
+
+
+		</div>
+
+	</div>
+		<div class="col-md-1"></div>
+	
+			{% for i in range(5) %}
+			
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+			
+			{% endfor%}
+
+	</div>
+	
+	<p></p>
+	
+	<div class="row">
+		<div class="col-md-1"></div>
+		
+			{% for i in range(5,10) %}
+			
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+			
+			{% endfor%}
+		
+	</div>
+	
+	<p></p>
+	
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			
+			{% if soldeInsuffisant == True %}
+				<p class="alert alert-danger" role="alert">Solde insuffisant</p>
+			{% endif %}
+			
+		</div>
+		
+	</div>
+	
+</div>
+
+
+{% include "vuePied.html" %}
